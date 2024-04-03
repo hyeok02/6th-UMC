@@ -1,0 +1,42 @@
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+.input-container input {
+    width: 70%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid black;
+    margin-right: 10px;
+}
+
+.input-container button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: skyblue;
+    color: gray;
+    cursor: pointer;
+}
+
+.lists-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-list {
+    width: 45%;
+}
+
+.task-list h2 {
+    margin-bottom: 10px;
+}
