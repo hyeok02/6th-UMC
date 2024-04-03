@@ -9,10 +9,11 @@
 <body>
     <div class="container">
         <h2>회원가입</h2>
-        <form>
+        <form id="form">
             <div class="group">
                 <label for="name">이름:</label>
-                <input type="text" id="name" required>
+                <input type="text" id="name" name="name" required>
+                <div class="error-message" id="name-error"></div>
             </div>
             <div class="group">
                 <label for="email">이메일:</label>

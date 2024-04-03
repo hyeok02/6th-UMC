@@ -15,7 +15,7 @@ body {
     margin-bottom: 20px;
 }
 .group label {
-    display: block;
+    display: block; /* 세로 정렬 */
     font-weight: bold;
 }
 .group input {
@@ -27,12 +27,13 @@ body {
 .group input[type="button"] {
     background-color: slategray;
     color: white;
-    cursor: pointer;
+    
+    
 }
 .modal {
     display: none; 
     position: fixed; 
-    z-index: 1;
+    z-index: 1; /* 다른 요소들 위에 나타남 */
     left: 0;
     top: 0;
     width: 100%;
@@ -47,4 +48,10 @@ body {
     padding: 20px;
     border: 1px solid slategray;
     width: 80%;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
 }
