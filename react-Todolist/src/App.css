@@ -1,0 +1,59 @@
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  border: 1px solid black;
+  position: absolute;
+  top: 40%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.input-container {
+  margin-bottom: 20px; /* 여백 */
+}
+
+.input-container input {
+  width: 70%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid black;
+  margin-right: 10px; 
+}
+
+.input-container button {
+  padding: 8px 15px;
+  border: none; /* 테두리 제거 */
+  border-radius: 4px;
+  background-color: skyblue;
+  color: black;
+  cursor: pointer;
+}
+
+.lists-container {
+  display: flex; /* 수평 배치 */
+  justify-content: space-between; /* 수평 정렬 */
+}
+
+.task-list {
+  width: 45%;
+}
+.complete-btn {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}

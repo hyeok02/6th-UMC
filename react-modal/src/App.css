@@ -1,0 +1,32 @@
+.modal {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.modal1 {
+  background: white;
+  padding: 24px 16px;
+  border-radius: 4px;
+  width: 320px;
+}
+
+.modal2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.close {
+  text-align: right;
+}
+
+#open {
+  background-color: whitesmoke;
+  border: 1px solid black;
+}
