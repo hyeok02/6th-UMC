@@ -1,4 +1,4 @@
-const Movie = {
+export const movies = {
     "dates": {
         "maximum": "2023-09-17",
         "minimum": "2023-07-31"
@@ -397,5 +397,3 @@ const Movie = {
     "total_pages": 5,
     "total_results": 83
 }
-
-export default Movie;

@@ -1,4 +1,4 @@
-export { Movie } from './API.jsx';
+import { movies } from './API.jsx';
 import Movie from './components/movie.jsx';
 import './App.css';
 
