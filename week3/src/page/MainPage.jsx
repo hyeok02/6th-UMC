@@ -48,7 +48,7 @@ const MainPage = () => {
                 <MainP>Find your movies!</MainP>
                 <SearchBox2>
                     <SearchInput/>
-                    <SearchImg src={SearchIcon} alt="search"/>
+                    <button>search</button>
                 </SearchBox2>
             </SearchBox>
         </PageContainer>
