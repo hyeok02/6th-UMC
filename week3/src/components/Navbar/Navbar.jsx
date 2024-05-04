@@ -1,46 +1,65 @@
-import styled from 'styled-components';
-import { Link as RouterLink } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { NavLink, useLocation } from "react-router-dom";
 
-const Nav = styled.nav`
-  background: #0A0E40;
-    color: white;
-    position: fixed;
-    top: 0;
+const NavContainer = styled.div`
     width: 100%;
-    height: 3vw;
+    height: 4vw;
+    background-color: #040E40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const NavContainer2 = styled.div`
+    width: 93%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px;
-    font-weight: bold;
-    z-index: 1000;
 `
 
-const Link = styled(RouterLink)`
-    color: white;          
-    text-decoration: none; 
-    margin: 0 10px; 
+const NavPContainer = styled.div`
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
+const NavP = styled(NavLink)`
+    font-size: 1vw;
+    font-weight: bold;
+    color: white;
     cursor: pointer;
 
-  &:hover{
-    font-size: 1.3vw;
-  }
+    &:hover {
+        color: #FFCC15;
+        font-size: 1.1vw;
+    }
 `
 
-const Navbar =()=>{
+const NavP2 = styled(NavP)`
+    &.active {
+        color: #FFCC15;
+    }
+`
+
+const Navbar = () => {
+    const location = useLocation();
+
     return (
-        <Nav>
-          <Link to="/">UMC Movie</Link>
-             <div>
-               <Link to="/register">회원가입</Link>
-               <Link to="/popular">Popular</Link>
-               <Link to="/nowplaying">Now Playing</Link>
-               <Link to="/toprated">Top Rated</Link>
-               <Link to="/upcoming">Upcoming</Link>
-            </div>
-
-        </Nav>
+        <NavContainer>
+            <NavContainer2>
+                <NavP to="/">UMC Movie</NavP>
+                <NavPContainer>
+                    <NavP2 to="/signup">회원가입</NavP2>
+                    <NavP2 to="/popular">Popular</NavP2>
+                    <NavP2 to="/now">Now Playing</NavP2>
+                    <NavP2 to="/top">Top Rated</NavP2>
+                    <NavP2 to="/up">Upcoming</NavP2>
+                </NavPContainer>
+            </NavContainer2>
+        </NavContainer>
     )
-
 }
+
 export default Navbar;
