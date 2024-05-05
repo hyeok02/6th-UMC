@@ -1,4 +1,4 @@
-import ListMovie from "../components/Movie/list-movie";
+import ListMovie from "../components/Movie/ListMovie";
 import PageContainer from "../components/Style/PageStyle";
 
 const PopularPage = () => {
