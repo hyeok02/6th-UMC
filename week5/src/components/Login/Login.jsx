@@ -12,7 +12,6 @@ const InputBox = styled.input`
     height: 3vw;
     background-color: white;
     border: none;
-    border-radius: 2.5vw;
     padding: 0 1vw;
     box-sizing: border-box;
     outline: none;

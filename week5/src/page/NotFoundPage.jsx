@@ -34,7 +34,7 @@ const NotFoundPage = () => {
         <>
             <NotFoundDiv>
                 <Titlep>Oops!</Titlep>
-                <ErrorMessagep>예상치 못한 에러가 발생했습니다</ErrorMessagep>
+                <ErrorMessagep>에러가 발생했습니다</ErrorMessagep>
                 <NotFoundp>Not Found</NotFoundp>
                 <Link to="/">메인으로 이동하기</Link>
 

@@ -64,13 +64,10 @@ const ItemResult = ({id, poster, original_title, title, rating, overview, releas
         navigate(`/movie/${original_title}`, { state: { movie: { id, poster, title, rating, overview, release_date } } });
     };
 
-
-    // explain 보이기
     const handleMouseOver = (e) => {
         e.currentTarget.querySelector('.overExplain').style.display = 'block';
     };
 
-    // explain 안보이기
     const handleMouseOut = (e) => {
         e.currentTarget.querySelector('.overExplain').style.display = 'none';
     };

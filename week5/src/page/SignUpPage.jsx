@@ -59,7 +59,6 @@ const SignUpPage = () => {
 
     const navigate = useNavigate(); 
 
-    // 가입 버튼 활성화 여부 -> true: 비활성화, false: 활성화
     const [isDisabled, setIsDisabled] = useState(true);
 
     useEffect(() => {
@@ -70,7 +69,7 @@ const SignUpPage = () => {
         }
     }, [name, email, age, password, passwordCheck]);
 
-    // 이름 유효성 검사
+    // 이름 검사
     const handleName = (event) => {
         const value = event.target.value;
         setName(value);
@@ -82,7 +81,7 @@ const SignUpPage = () => {
         }
     }
 
-    // 이메일 유효성 검사
+    // 이메일 검사
     const handleEmail = (event) => {
         const value = event.target.value;
         setEmail(value);
@@ -96,7 +95,7 @@ const SignUpPage = () => {
         }
     }
 
-    // 나이 유효성 검사
+    // 나이 검사
     const handleAge = (event) => {
         const value = event.target.value;
         setAge(value);
@@ -118,12 +117,12 @@ const SignUpPage = () => {
         }
     }
 
-    // 비밀번호 유효성 검사
+    // 비밀번호 검사
     const handlePassword = (event) => {
         const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_])+/;
         const value = event.target.value;
         setPassword(value);
-        
+    
         if (!value) {
             setPasswordError("비밀번호를 입력해주세요!");
         } else if (value.length < 4) {
@@ -137,7 +136,7 @@ const SignUpPage = () => {
         }
     }
 
-    // 비밀번호 확인 유효성 검사
+    // 비밀번호 확인 검사
     const handlePasswordCheck = (event) => {
         const value = event.target.value;
         setPasswordCheck(value);
@@ -173,7 +172,7 @@ const SignUpPage = () => {
 
     return (
         <PageContainer>
-            <SignUpP fontWeight="bold" style={{marginTop: "2.8vw"}}>회원가입 페이지</SignUpP>
+            <SignUpP fontWeight="bold" style={{marginTop: "2.8vw"}}>회원가입</SignUpP>
 
             <SignUpContainer>
                 <InputSignUp placeholder="이름을 입력하세요" type="text" value={name} onChange={handleName} error={nameError}/>
