@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const BannerContainer = styled.div`
@@ -17,9 +17,20 @@ const BannerP = styled.p`
 `;
 
 const Banner = () => {
-    // 로컬 스토리지에서 사용자 이름을 가져온다.
-    const signupLogs = localStorage.getItem("signupLogs");
-    const username = signupLogs ? JSON.parse(signupLogs).username : "";
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem("userNickname");
+        setUsername(storedUsername);
+    }, []);
+
+    const handleLogout = () => {
+        // 사용자 정보 제거
+        localStorage.removeItem("userToken");
+        localStorage.removeItem("userNickname");
+        // 상태 업데이트
+        setUsername('');
+    };
 
     return (
         <BannerContainer>

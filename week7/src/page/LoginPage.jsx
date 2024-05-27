@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import PageContainer from "../components/Style/PageStyle";
 import InputLogin from "../components/Login/Login";
 
@@ -39,42 +40,35 @@ const LoginButton = styled.button`
 const LoginPage = () => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
-
-    useEffect(() => {
-        const userToken = localStorage.getItem('userToken');
-        if (userToken) {
-            // 이미 로그인되어 있는 경우, 메인 페이지로 자동 이동
-            window.location.href = "/";
-        }
-    }, []);
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         
         if (id && password) {
-          try {
-            const response = await axios.post(
-              "http://localhost:8080/auth/login",
-              {
-                username: id,
-                password: password,
-              }
-            );
-    
-            const { token, username } = response.data;
-    
-            if (token) {
-              localStorage.setItem("userToken", token);
-              localStorage.setItem("userNickname", username);
-              window.location.href = "/";
-            } else {
-              console.log("로그인 실패: ", response.data.message);
+            try {
+                const response = await axios.post(
+                    "http://localhost:8080/auth/login",
+                    {
+                        username: id,
+                        password: password,
+                    }
+                );
+
+                const { token, username } = response.data;
+
+                if (token) {
+                    localStorage.setItem("userToken", token);
+                    localStorage.setItem("userNickname", username);
+                    navigate('/');
+                } else {
+                    console.log("로그인 실패: ", response.data.message);
+                }
+            } catch (error) {
+                console.log("error: ", error.response.data);
             }
-          } catch (error) {
-            console.log("error: ", error.response.data);
-          }
         }
-      };
+    };
 
     return (
         <PageContainer>

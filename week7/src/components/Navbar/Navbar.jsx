@@ -1,91 +1,80 @@
-import styled from 'styled-components';
-import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
-const Nav = styled.nav`
-  background: #0A0E40;
-  color: white;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 3vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  font-weight: bold;
-  z-index: 1000;
-`;
+const NavContainer = styled.div`
+    width: 100%;
+    height: 4vw;
+    background-color: #040E40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
 
-const Link = styled(RouterLink)`
-  color: ${({ $active }) => ($active ? 'yellow' : 'white')};
-  text-decoration: none; 
-  margin: 0 10px; 
-  cursor: pointer;
+const NavContainer2 = styled.div`
+    width: 93%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
 
-  &:hover {
-    font-size: 1.3vw;
-    color: yellow;
-  }
-`;
+const NavPContainer = styled.div`
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
 
-const LogoutButton = styled.button`
-  color: ${({ $active }) => ($active ? 'yellow' : 'white')};
-  background: none;
-  border: none;
-  margin: 0 10px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
+const NavP = styled(NavLink)`
+    font-size: 1vw;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
 
-  &:hover {
-    font-size: 1.3vw;
-    color: yellow;
-  }
-`;
+    &:hover {
+        color: #FFCC15;
+        font-size: 1.1vw;
+    }
+`
+
+const NavP2 = styled(NavP)`
+    &.active {
+        color: #FFCC15;
+    }
+`
 
 const Navbar = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const isLoggedIn = !!localStorage.getItem('userToken');
 
-  useEffect(() => {
-    const token = localStorage.getItem("userToken");
-    setIsLoggedIn(!!token);
-  }, []);
+    const handleLogout = () => {
+        localStorage.removeItem("userToken");
+        localStorage.removeItem("userNickname");
+        navigate('/');
+    };
 
-  const handleLogout = () => {
-    localStorage.removeItem("userToken");
-    localStorage.removeItem("userNickname");
-    setIsLoggedIn(false);
-    window.dispatchEvent(new Event('storage')); // Trigger storage event
-    navigate('/');
-  };
-
-  return (
-    <Nav>
-      <Link to="/" $active={location.pathname === '/'}>UMC Movie</Link>
-      <div>
-        {!isLoggedIn ? (
-          <>
-            <Link to="/login" $active={location.pathname === '/login'}>로그인</Link>
-            <Link to="/signup" $active={location.pathname === '/signup'}>회원가입</Link>
-          </>
-        ) : (
-          <LogoutButton 
-            $active={false} 
-            onClick={handleLogout}
-          >
-            로그아웃
-          </LogoutButton>
-        )}
-        <Link to="/popular" $active={location.pathname === '/popular'}>Popular</Link>
-        <Link to="/nowplaying" $active={location.pathname === '/nowplaying'}>Now Playing</Link>
-        <Link to="/toprated" $active={location.pathname === '/toprated'}>Top Rated</Link>
-        <Link to="/upcoming" $active={location.pathname === '/upcoming'}>Upcoming</Link>
-      </div>
-    </Nav>
-  );
-};
+    return (
+        <NavContainer>
+            <NavContainer2>
+                <NavP to="/">UMC Movie</NavP>
+                <NavPContainer>
+                    {isLoggedIn ? (
+                        <NavP onClick={handleLogout}>로그아웃</NavP>
+                    ) : (
+                        <>
+                            <NavP2 to="/login">로그인</NavP2>
+                            <NavP2 to="/sign">회원가입</NavP2>
+                        </>
+                    )}
+                    <NavP2 to="/popular">Popular</NavP2>
+                    <NavP2 to="/now">Now Playing</NavP2>
+                    <NavP2 to="/top">Top Rated</NavP2>
+                    <NavP2 to="/up">Upcoming</NavP2>
+                </NavPContainer>
+            </NavContainer2>
+        </NavContainer>
+    )
+}
 
 export default Navbar;
