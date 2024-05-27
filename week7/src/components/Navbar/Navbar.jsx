@@ -57,6 +57,7 @@ const Navbar = () => {
             <NavContainer2>
                 <NavP to="/">UMC Movie</NavP>
                 <NavPContainer>
+                    <NavP2 to="/login">로그인</NavP2>
                     <NavP2 to="/sign">회원가입</NavP2>
                     <NavP2 to="/popular">Popular</NavP2>
                     <NavP2 to="/now">Now Playing</NavP2>
