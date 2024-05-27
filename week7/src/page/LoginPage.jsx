@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import styled from "styled-components";
 import PageContainer from "../components/Style/PageStyle";
 import InputLogin from "../components/Login/Login";
@@ -36,22 +37,64 @@ const LoginButton = styled.button`
 `
 
 const LoginPage = () => {
+    const [id, setId] = useState('');
+    const [password, setPassword] = useState('');
+
     useEffect(() => {
-        const signupLogs = localStorage.getItem('signupLogs');
-        if (signupLogs) {
-            console.log(JSON.parse(signupLogs));
+        const userToken = localStorage.getItem('userToken');
+        if (userToken) {
+            // 이미 로그인되어 있는 경우, 메인 페이지로 자동 이동
+            window.location.href = "/";
         }
     }, []);
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        
+        if (id && password) {
+          try {
+            const response = await axios.post(
+              "http://localhost:8080/auth/login",
+              {
+                username: id,
+                password: password,
+              }
+            );
+    
+            const { token, username } = response.data;
+    
+            if (token) {
+              localStorage.setItem("userToken", token);
+              localStorage.setItem("userNickname", username);
+              window.location.href = "/";
+            } else {
+              console.log("로그인 실패: ", response.data.message);
+            }
+          } catch (error) {
+            console.log("error: ", error.response.data);
+          }
+        }
+      };
 
     return (
         <PageContainer>
             <LoginP>로그인 페이지</LoginP>
 
             <LoginContainer>
-                <InputLogin placeholder="아이디" type="text"/>
-                <InputLogin placeholder="비밀번호" type="password"/>
+                <InputLogin 
+                    placeholder="아이디" 
+                    type="text" 
+                    value={id} 
+                    onChange={(e) => setId(e.target.value)}
+                />
+                <InputLogin 
+                    placeholder="비밀번호" 
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)}
+                />
 
-                <LoginButton>로그인</LoginButton>
+                <LoginButton onClick={handleLogin}>로그인</LoginButton>
             </LoginContainer>
         </PageContainer>
     )

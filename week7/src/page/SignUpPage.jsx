@@ -46,12 +46,14 @@ const BottomContainer = styled.div`
 const SignUpPage = () => {
     // 입력 값
     const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [age, setAge] = useState('');
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
     // 에러 메시지
     const [nameError, setNameError] = useState('');
+    const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [ageError, setAgeError] = useState('');
     const [passwordError, setPasswordError] = useState('');
@@ -62,12 +64,12 @@ const SignUpPage = () => {
     const [isDisabled, setIsDisabled] = useState(true);
 
     useEffect(() => {
-        if (name && email && age && password && (password === passwordCheck)) {
+        if (name && username && email && age && password && (password === passwordCheck)) {
             setIsDisabled(false);
         } else {
             setIsDisabled(true);
         }
-    }, [name, email, age, password, passwordCheck]);
+    }, [name, username, email, age, password, passwordCheck]);
 
     // 이름 검사
     const handleName = (event) => {
@@ -78,6 +80,18 @@ const SignUpPage = () => {
             setNameError("이름을 입력해주세요!");
         } else { 
             setNameError('');
+        }
+    }
+
+    // 아이디 검사
+    const handleUsername = (event) => {
+        const value = event.target.value;
+        setUsername(value);
+
+        if (!value) {
+            setUsernameError("아이디를 입력해주세요!");
+        } else { 
+            setUsernameError('');
         }
     }
 
@@ -151,22 +165,26 @@ const SignUpPage = () => {
     // 가입하기 통신
     const handleSignUp = () => {
         const userData = {
+            name: name,
             age: age,
-            checkpassword: passwordCheck,
+            passwordCheck: passwordCheck,
             email: email,
             password: password,
-            username: name
+            username: username
         };
 
-        axios.post('https://jsonplaceholder.typicode.com/posts', userData)
+        axios.post('http://localhost:8080/auth/signup', userData)
             .then(response => {
                 console.log(response.data);
-                // 페이지 이동 시 콘솔 내용 보기 위해 로컬 스토리지에 저장
                 localStorage.setItem('signupLogs', JSON.stringify(response.data));
-                window.location.href = "/login";
+                alert("회원가입이 정상적으로 처리되었습니다.");
+                navigate('/login');
             })
             .catch(error => {
                 console.error('Error:', error);
+                if (error.response.status === 409) {
+                    navigate('/login');
+                }
             });
     }
 
@@ -176,6 +194,7 @@ const SignUpPage = () => {
 
             <SignUpContainer>
                 <InputSignUp placeholder="이름을 입력하세요" type="text" value={name} onChange={handleName} error={nameError}/>
+                <InputSignUp placeholder="아이디를 입력하세요" type="text" value={username} onChange={handleUsername} error={usernameError}/>
                 <InputSignUp placeholder="이메일을 입력하세요" type="text" value={email} onChange={handleEmail} error={emailError}/>
                 <InputSignUp placeholder="나이를 입력하세요" type="text" value={age} onChange={handleAge} error={ageError}/>
                 <InputSignUp placeholder="비밀번호를 입력하세요" type="password" value={password} onChange={handlePassword} error={passwordError}/>

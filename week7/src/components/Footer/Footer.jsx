@@ -7,6 +7,11 @@ const FooterContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    z-index: 999; 
 `
 
 const FooterP = styled.p`

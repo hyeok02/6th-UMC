@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from "styled-components";
 
 const InputContainer = styled.div`
@@ -18,10 +19,15 @@ const InputBox = styled.input`
     font-size: 0.8vw;
 `
 
-const InputLogin = ({placeholder, type}) => {
+const InputLogin = ({placeholder, type, value, onChange}) => {
     return (
         <InputContainer>
-            <InputBox placeholder={placeholder} type={type}/>
+            <InputBox 
+                placeholder={placeholder} 
+                type={type} 
+                value={value} 
+                onChange={onChange}
+            />
         </InputContainer>
     )
 }
