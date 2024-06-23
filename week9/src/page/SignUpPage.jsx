@@ -11,11 +11,11 @@ const SignUpP = styled.p`
     font-weight: ${props => props.fontWeight || "normal"};
 
     @media (max-width: 768px) {
-        font-size: ${props => props.fontSize || "3vw"};
+        font-size: 2vw;
     }
 
     @media (max-width: 480px) {
-        font-size: ${props => props.fontSize || "4vw"};
+        font-size: 3vw;
     }
 `;
 
