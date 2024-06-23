@@ -16,14 +16,31 @@ const Container = styled.div`
 `;
 
 const GridContainer = styled.div`
-    width : 90%;
+    width: 90%;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     justify-content: center;
+    gap: 19.2px; // 1vw를 1920px 기준으로 변환
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    @media (max-width: 992px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 576px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 `;
 
 const SpinnerContainer = styled.div`
-    min-height: calc(100vh - 6vw);
+    min-height: calc(100vh - 115.2px); // 6vw를 1920px 기준으로 변환
     display: flex;
     align-items: center; 
 `;
@@ -100,18 +117,7 @@ const ListMovie = ({ Url, mode }) => {
                             dataLength={movies.length}
                             next={loadMoreMovies}
                             hasMore={hasMore}
-                        >
-                            {movies.map((item) => (
-                                <ItemMovie
-                                    key={item.id}
-                                    id={item.id}
-                                    poster={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-                                    title={item.title}
-                                    rating={item.vote_average.toFixed(1)}
-                                    overview={item.overview}
-                                />
-                            ))}
-                        </InfiniteScrollComponent>
+                        />
                     )}
                 </>
             )}

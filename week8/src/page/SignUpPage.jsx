@@ -3,64 +3,98 @@ import axios from "axios";
 import styled from "styled-components";
 import PageContainer from "../components/Style/PageStyle";
 import InputSignUp from "../components/Sign/Sign";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpP = styled.p`
-    font-size: ${props => props.fontSize || "1vw"};
+    font-size: ${props => props.fontSize || "19.2px"}; // 1vw를 1920px 기준으로 변환
     color: white;
     font-weight: ${props => props.fontWeight || "normal"};
-`
+
+    @media (max-width: 768px) {
+        font-size: ${props => props.fontSizeMobile || "57.6px"}; // 3vw를 768px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        font-size: ${props => props.fontSizeMobile || "76.8px"}; // 4vw를 480px 기준으로 변환
+    }
+`;
 
 const SignUpContainer = styled.div`
-    margin-top: 2vw;
-    width: 31.7vw;
+    margin-top: 38.4px; // 2vw를 1920px 기준으로 변환
+    width: 608.64px; // 31.7vw를 1920px 기준으로 변환
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2vw;
-`
+    gap: 38.4px; // 2vw를 1920px 기준으로 변환
+
+    @media (max-width: 768px) {
+        width: 80%;
+        gap: 76.8px; // 4vw를 768px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        width: 90%;
+        gap: 115.2px; // 6vw를 480px 기준으로 변환
+    }
+`;
 
 const SignUpButton = styled.button`
     width: 100%;
-    height: 3vw;
+    height: 57.6px; // 3vw를 1920px 기준으로 변환
     border: none;
-    border-radius: 2.5vw;
-    background-color: ${ props => props.disabled ? 'white' : '#FFCC15'};
+    border-radius: 48px; // 2.5vw를 1920px 기준으로 변환
+    background-color: ${props => props.disabled ? 'white' : '#FFCC15'};
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: ${ props => props.disabled ? 'not-allowed' : 'pointer'};
-    margin-top: 2vw;
-    font-size: 1.2vw;
+    cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+    margin-top: 38.4px; // 2vw를 1920px 기준으로 변환
+    font-size: 23.04px; // 1.2vw를 1920px 기준으로 변환
     color: black;
     font-weight: bold;
-`
+
+    @media (max-width: 768px) {
+        height: 61.44px; // 8vw를 768px 기준으로 변환
+        font-size: 57.6px; // 3vw를 768px 기준으로 변환
+        border-radius: 96px; // 5vw를 768px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        height: 48px; // 10vw를 480px 기준으로 변환
+        font-size: 57.6px; // 4vw를 480px 기준으로 변환
+        border-radius: 72px; // 6vw를 480px 기준으로 변환
+    }
+`;
 
 const BottomContainer = styled.div`
-    width: 22vw;
-    margin-top: 0.3vw;
+    width: 422.4px; // 22vw를 1920px 기준으로 변환
+    margin-top: 5.76px; // 0.3vw를 1920px 기준으로 변환
     display: flex;
     justify-content: space-between;
-`
+
+    @media (max-width: 768px) {
+        width: 70%;
+    }
+
+    @media (max-width: 480px) {
+        width: 80%;
+    }
+`;
 
 const SignUpPage = () => {
-    // 입력 값
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [age, setAge] = useState('');
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
-    // 에러 메시지
     const [nameError, setNameError] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [ageError, setAgeError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [passwordCheckError, setPasswordCheckError] = useState('');
-
     const navigate = useNavigate(); 
-
     const [isDisabled, setIsDisabled] = useState(true);
 
     useEffect(() => {
@@ -71,11 +105,9 @@ const SignUpPage = () => {
         }
     }, [name, username, email, age, password, passwordCheck]);
 
-    // 이름 검사
     const handleName = (event) => {
         const value = event.target.value;
         setName(value);
-
         if (!value) {
             setNameError("이름을 입력해주세요!");
         } else { 
@@ -83,11 +115,9 @@ const SignUpPage = () => {
         }
     }
 
-    // 아이디 검사
     const handleUsername = (event) => {
         const value = event.target.value;
         setUsername(value);
-
         if (!value) {
             setUsernameError("아이디를 입력해주세요!");
         } else { 
@@ -95,11 +125,9 @@ const SignUpPage = () => {
         }
     }
 
-    // 이메일 검사
     const handleEmail = (event) => {
         const value = event.target.value;
         setEmail(value);
-
         if (!value) {
             setEmailError("이메일을 입력해주세요!");
         } else if (!value.includes('@')) {
@@ -109,11 +137,9 @@ const SignUpPage = () => {
         }
     }
 
-    // 나이 검사
     const handleAge = (event) => {
         const value = event.target.value;
         setAge(value);
-
         if (!value) {
             setAgeError("나이를 입력해주세요!");
         } else if (isNaN(value)) {
@@ -131,30 +157,26 @@ const SignUpPage = () => {
         }
     }
 
-    // 비밀번호 검사
     const handlePassword = (event) => {
         const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_])+/;
         const value = event.target.value;
         setPassword(value);
-    
         if (!value) {
             setPasswordError("비밀번호를 입력해주세요!");
         } else if (value.length < 4) {
             setPasswordError("최소 4자리 이상 입력해주세요.");
         } else if (value.length > 12) {
             setPasswordError("최대 12자리까지 입력 가능합니다.");
-        } else if (passwordPattern.test(value) == false) {
+        } else if (passwordPattern.test(value) === false) {
             setPasswordError("비밀번호는 영어, 숫자, 특수문자를 포함해주세요.");
         } else {
             setPasswordError('');
         }
     }
 
-    // 비밀번호 확인 검사
     const handlePasswordCheck = (event) => {
         const value = event.target.value;
         setPasswordCheck(value);
-
         if (!value || value !== password) {
             setPasswordCheckError("비밀번호가 일치하지 않습니다.");
         } else {
@@ -162,7 +184,6 @@ const SignUpPage = () => {
         }
     }
 
-    // 가입하기 통신
     const handleSignUp = () => {
         const userData = {
             name: name,
@@ -190,7 +211,7 @@ const SignUpPage = () => {
 
     return (
         <PageContainer>
-            <SignUpP fontWeight="bold" style={{marginTop: "2.8vw"}}>회원가입</SignUpP>
+            <SignUpP fontWeight="bold" style={{marginTop: "53.76px"}}>회원가입</SignUpP> {/* 2.8vw를 1920px 기준으로 변환 */}
 
             <SignUpContainer>
                 <InputSignUp placeholder="이름을 입력하세요" type="text" value={name} onChange={handleName} error={nameError}/>
@@ -204,8 +225,8 @@ const SignUpPage = () => {
             </SignUpContainer>
             
             <BottomContainer>
-                <SignUpP fontSize="0.8vw">이미 아이디가 있으신가요?</SignUpP>
-                <SignUpP fontWeight="bold" fontSize="0.8vw" style={{cursor: "pointer", textDecoration: "underline"}} onClick={()=>navigate('/login')}>로그인 페이지로 이동하기</SignUpP>
+                <SignUpP fontSize="15.36px" fontSizeMobile="38.4px">이미 아이디가 있으신가요?</SignUpP> {/* 0.8vw를 1920px 기준으로 변환 */}
+                <SignUpP fontWeight="bold" fontSize="15.36px" fontSizeMobile="38.4px" style={{cursor: "pointer", textDecoration: "underline"}} onClick={()=>navigate('/login')}>로그인 페이지로 이동하기</SignUpP> {/* 0.8vw를 1920px 기준으로 변환 */}
             </BottomContainer>
         </PageContainer>
     )

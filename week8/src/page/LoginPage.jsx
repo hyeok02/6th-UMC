@@ -6,36 +6,63 @@ import PageContainer from "../components/Style/PageStyle";
 import InputLogin from "../components/Login/Login";
 
 const LoginP = styled.p`
-    font-size: 1vw;
+    font-size: 19.2px; // 1vw를 1920px 기준으로 변환
     color: white;
     font-weight: bold;
-    margin-top: 2.8vw;
-`
+    margin-top: 53.76px; // 2.8vw를 1920px 기준으로 변환
+
+    @media (max-width: 768px) {
+        font-size: 57.6px; // 3vw를 768px 기준으로 변환
+        margin-top: 38.4px; // 5vw를 768px 기준으로 변환
+    }
+`;
 
 const LoginContainer = styled.div`
-    margin-top: 2vw;
-    width: 31.7vw;
+    margin-top: 38.4px; // 2vw를 1920px 기준으로 변환
+    width: 608.64px; // 31.7vw를 1920px 기준으로 변환
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2vw;
-`
+    gap: 38.4px; // 2vw를 1920px 기준으로 변환
+
+    @media (max-width: 768px) {
+        width: 80%;
+        gap: 57.6px; // 4vw를 768px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        width: 90%;
+        gap: 86.4px; // 6vw를 480px 기준으로 변환
+    }
+`;
 
 const LoginButton = styled.button`
     width: 100%;
-    height: 3vw;
+    height: 57.6px; // 3vw를 1920px 기준으로 변환
     border: none;
-    border-radius: 2.5vw;
+    border-radius: 48px; // 2.5vw를 1920px 기준으로 변환
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-top: 2vw;
-    font-size: 1.2vw;
+    margin-top: 38.4px; // 2vw를 1920px 기준으로 변환
+    font-size: 23.04px; // 1.2vw를 1920px 기준으로 변환
     color: black;
     font-weight: bold;
-`
+
+    @media (max-width: 768px) {
+        height: 61.44px; // 8vw를 768px 기준으로 변환
+        font-size: 57.6px; // 3vw를 768px 기준으로 변환
+        border-radius: 76.8px; // 5vw를 768px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        height: 48px; // 10vw를 480px 기준으로 변환
+        font-size: 57.6px; // 4vw를 480px 기준으로 변환
+        border-radius: 72px; // 6vw를 480px 기준으로 변환
+    }
+`;
 
 const LoginPage = () => {
     const [id, setId] = useState('');
@@ -91,7 +118,7 @@ const LoginPage = () => {
                 <LoginButton onClick={handleLogin}>로그인</LoginButton>
             </LoginContainer>
         </PageContainer>
-    )
-}
+    );
+};
 
 export default LoginPage;

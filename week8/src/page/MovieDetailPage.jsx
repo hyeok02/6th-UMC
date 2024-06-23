@@ -7,28 +7,80 @@ import PageContainer from "../components/Style/PageStyle";
 
 const DetailBox = styled.div`
     width: 60%;
-    min-height: calc(100vh - 5vw);
+    min-height: calc(100vh - 96px); // 5vw를 1920px 기준으로 변환
     display: flex;
-    margin: 0 20vw;
+    margin: 0 384px; // 20vw를 1920px 기준으로 변환
+    flex-direction: row;
+
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        width: 80%;
+        margin: 0 192px; // 10vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 768px) {
+        width: 90%;
+        margin: 0 96px; // 5vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        margin: 0;
+    }
 `;
 
 const Posterimg = styled.img`
     width: 30%;
     height: auto;
-    margin: 5vw;
+    margin: 96px; // 5vw를 1920px 기준으로 변환
+
+    @media (max-width: 1024px) {
+        width: 50%;
+        margin: 38.4px auto; // 2vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 768px) {
+        width: 70%;
+        margin: 38.4px auto; // 2vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        width: 90%;
+        margin: 38.4px auto; // 2vw를 1920px 기준으로 변환
+    }
 `;
 
 const DetailTextdiv = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 5vw 0;
-    margin-right: 5vw;
+    margin: 96px 0; // 5vw를 1920px 기준으로 변환
+    margin-right: 96px; // 5vw를 1920px 기준으로 변환
+
+    @media (max-width: 1024px) {
+        margin: 38.4px 0; // 2vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 768px) {
+        margin: 38.4px; // 2vw를 1920px 기준으로 변환
+    }
 `;
 
 const TitleP = styled.p`
     color: white;
     font-weight: bold;
-    font-size: 2vw;
+    font-size: 38.4px; // 2vw를 1920px 기준으로 변환
+
+    @media (max-width: 1024px) {
+        font-size: 57.6px; // 3vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 768px) {
+        font-size: 76.8px; // 4vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        font-size: 96px; // 5vw를 1920px 기준으로 변환
+    }
 `;
 
 const RateDiv = styled.div`
@@ -36,42 +88,102 @@ const RateDiv = styled.div`
     align-items: center;
     gap: 0.3rem;
     color: white;
-    font-size: 1.2vw;
+    font-size: 23.04px; // 1.2vw를 1920px 기준으로 변환
+
+    @media (max-width: 1024px) {
+        font-size: 38.4px; // 2vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 768px) {
+        font-size: 57.6px; // 3vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        font-size: 76.8px; // 4vw를 1920px 기준으로 변환
+    }
 `;
 
 const ReleaseDateP = styled.p`
     color: white;
-    font-size: 1.2vw;
+    font-size: 23.04px; // 1.2vw를 1920px 기준으로 변환
+
+    @media (max-width: 1024px) {
+        font-size: 38.4px; // 2vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 768px) {
+        font-size: 57.6px; // 3vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        font-size: 76.8px; // 4vw를 1920px 기준으로 변환
+    }
 `;
 
 const SummaryTitle = styled.p`
     color: white;
     font-weight: bold;
-    font-size: 1.2vw;
+    font-size: 23.04px; // 1.2vw를 1920px 기준으로 변환
+
+    @media (max-width: 1024px) {
+        font-size: 38.4px; // 2vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 768px) {
+        font-size: 57.6px; // 3vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        font-size: 76.8px; // 4vw를 1920px 기준으로 변환
+    }
 `;
 
 const SummaryP = styled.p`
     color: white;
-    font-size: 1vw;
+    font-size: 19.2px; // 1vw를 1920px 기준으로 변환
+
+    @media (max-width: 1024px) {
+        font-size: 34.56px; // 1.8vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 768px) {
+        font-size: 48px; // 2.5vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        font-size: 57.6px; // 3vw를 1920px 기준으로 변환
+    }
 `;
 
 const BackgroundDiv = styled.div`
     width: 100%;
-    min-height: calc(100vh - 5vw);
+    min-height: calc(100vh - 96px); // 5vw를 1920px 기준으로 변환
     background: rgba(0, 0, 0, 0.7);
 `;
 
 const CreditsTitle = styled.h2`
     color: white;
     text-align: center;
-    margin-bottom: 2vw;
+    margin-bottom: 38.4px; // 2vw를 1920px 기준으로 변환
+
+    @media (max-width: 1024px) {
+        font-size: 48px; // 2.5vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 768px) {
+        font-size: 57.6px; // 3vw를 1920px 기준으로 변환
+    }
+
+    @media (max-width: 480px) {
+        font-size: 76.8px; // 4vw를 1920px 기준으로 변환
+    }
 `;
 
 const CreditsContainer = styled.div`
     color: white;
     display: grid;  
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  
-    gap: 1vw;   
+    gap: 19.2px; // 1vw를 1920px 기준으로 변환
     justify-items: center;  
     justify-content: center;
     text-align: center;
@@ -88,7 +200,22 @@ const CreditImage = styled.img`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-bottom: 0.5vw;
+    margin-bottom: 9.6px; // 0.5vw를 1920px 기준으로 변환
+
+    @media (max-width: 1024px) {
+        width: 70px;
+        height: 70px;
+    }
+
+    @media (max-width: 768px) {
+        width: 90px;
+        height: 90px;
+    }
+
+    @media (max-width: 480px) {
+        width: 110px;
+        height: 110px;
+    }
 `;
 
 const MovieDetailPage = () => {
