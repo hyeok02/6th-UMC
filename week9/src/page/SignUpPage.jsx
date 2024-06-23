@@ -3,13 +3,21 @@ import axios from "axios";
 import styled from "styled-components";
 import PageContainer from "../components/Style/PageStyle";
 import InputSignUp from "../components/Sign/Sign";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpP = styled.p`
     font-size: ${props => props.fontSize || "1vw"};
     color: white;
     font-weight: ${props => props.fontWeight || "normal"};
-`
+
+    @media (max-width: 768px) {
+        font-size: ${props => props.fontSize || "3vw"};
+    }
+
+    @media (max-width: 480px) {
+        font-size: ${props => props.fontSize || "4vw"};
+    }
+`;
 
 const SignUpContainer = styled.div`
     margin-top: 2vw;
@@ -18,30 +26,62 @@ const SignUpContainer = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 2vw;
-`
+
+    @media (max-width: 768px) {
+        width: 80%;
+        gap: 4vw;
+    }
+
+    @media (max-width: 480px) {
+        width: 90%;
+        gap: 6vw;
+    }
+`;
 
 const SignUpButton = styled.button`
     width: 100%;
     height: 3vw;
     border: none;
     border-radius: 2.5vw;
-    background-color: ${ props => props.disabled ? 'white' : '#FFCC15'};
+    background-color: ${props => props.disabled ? 'white' : '#FFCC15'};
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: ${ props => props.disabled ? 'not-allowed' : 'pointer'};
+    cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     margin-top: 2vw;
     font-size: 1.2vw;
     color: black;
     font-weight: bold;
-`
+
+    @media (max-width: 768px) {
+        height: 8vw;
+        font-size: 3vw;
+        border-radius: 5vw;
+    }
+
+    @media (max-width: 480px) {
+        height: 10vw;
+        font-size: 4vw;
+        border-radius: 6vw;
+    }
+`;
 
 const BottomContainer = styled.div`
     width: 22vw;
     margin-top: 0.3vw;
     display: flex;
     justify-content: space-between;
-`
+
+    @media (max-width: 768px) {
+        width: 60%;
+        margin-top: 1vw;
+    }
+
+    @media (max-width: 480px) {
+        width: 70%;
+        margin-top: 2vw;
+    }
+`;
 
 const SignUpPage = () => {
     // 입력 값

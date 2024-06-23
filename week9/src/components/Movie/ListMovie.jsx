@@ -6,25 +6,46 @@ import Spinner from "../Spinner/Spinner";
 import Pagination from "../Pagination";
 import InfiniteScrollComponent from "../InfiniteScroll";
 
-const ListContainer = styled.div`
-    width: 100%;
-    align-items: center;
-    justify-items: center;
+const Container = styled.div`
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; 
+    align-items: center; 
 `;
 
-const Container = styled.div`
-    width: 80%;
-    margin-left: 10%;
+const GridContainer = styled.div`
+    width: 100%;
+    
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    justify-content: center;
+
+    @media (max-width: 1200px) {
+        width: 80%;
+        margin-right: 10%;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 768px) {
+        width: 70%;
+        margin-right: 15%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+        width: 60%;
+        margin-right: 20%;
+        grid-template-columns: repeat(1, 1fr);
+    }
 `;
 
 const SpinnerContainer = styled.div`
-    min-height: calc(100vh - 5vw);
+    min-height: calc(100vh - 6vw);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; 
 `;
 
 const ListMovie = ({ Url, mode }) => {
@@ -36,34 +57,33 @@ const ListMovie = ({ Url, mode }) => {
     const accessToken = import.meta.env.VITE_API_ACCESS;
 
     const fetchMovies = useCallback(async (page) => {
-        console.log(`Fetching movies for page: ${page}, mode: ${mode}`);
-        setLoading(true);
-        const options = {
-            method: 'GET',
-            url: Url,
-            params: { language: 'ko', page: page },
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${accessToken}`
-            }
-        };
-
         try {
+            const options = {
+                method: 'GET',
+                url: Url,
+                params: { language: 'ko', page },
+                headers: {
+                    accept: 'application/json',
+                    Authorization: `Bearer ${accessToken}`
+                }
+            };
+
+            setLoading(true);
+
             const response = await axios.request(options);
-            console.log('Fetched movies:', response.data.results); 
             setMovies(prev => mode === 'infinite' ? [...prev, ...response.data.results] : response.data.results);
             setPageCount(response.data.total_pages);
             setHasMore(page < response.data.total_pages);
             setLoading(false);
-        } catch (err) {
-            console.error('Error fetching movies:', err); 
+        } catch (error) {
+            console.error(error);
             setLoading(false);
         }
     }, [Url, mode, accessToken]);
 
     useEffect(() => {
         fetchMovies(currentPage);
-    }, [Url, currentPage, fetchMovies, mode]);
+    }, [Url, currentPage, fetchMovies]);
 
     const handlePageClick = (event) => {
         setCurrentPage(event.selected + 1);
@@ -74,14 +94,14 @@ const ListMovie = ({ Url, mode }) => {
     };
 
     return (
-        <ListContainer>
-            {loading && currentPage === 1 ? (
+        <Container>
+            {loading ? (
                 <SpinnerContainer>
-                    <Spinner />
-                </SpinnerContainer>
+                    <Spinner loading={loading} />
+                </SpinnerContainer> 
             ) : (
                 <>
-                    <Container>
+                    <GridContainer>
                         {movies.map((item) => (
                             <ItemMovie
                                 key={item.id}
@@ -92,7 +112,7 @@ const ListMovie = ({ Url, mode }) => {
                                 overview={item.overview}
                             />
                         ))}
-                    </Container>
+                    </GridContainer>
                     {mode === 'pagination' ? (
                         <Pagination pageCount={pageCount} handlePageClick={handlePageClick} currentPage={currentPage} />
                     ) : (
@@ -100,22 +120,11 @@ const ListMovie = ({ Url, mode }) => {
                             dataLength={movies.length}
                             next={loadMoreMovies}
                             hasMore={hasMore}
-                        >
-                            {movies.map((item) => (
-                                <ItemMovie
-                                    key={item.id}
-                                    id={item.id}
-                                    poster={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-                                    title={item.title}
-                                    rating={item.vote_average.toFixed(1)}
-                                    overview={item.overview}
-                                />
-                            ))}
-                        </InfiniteScrollComponent>
+                        />
                     )}
                 </>
             )}
-        </ListContainer>
+        </Container>
     );
 };
 

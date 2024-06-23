@@ -10,7 +10,12 @@ const LoginP = styled.p`
     color: white;
     font-weight: bold;
     margin-top: 2.8vw;
-`
+
+    @media (max-width: 768px) {
+        font-size: 3vw;
+        margin-top: 5vw;
+    }
+`;
 
 const LoginContainer = styled.div`
     margin-top: 2vw;
@@ -19,7 +24,17 @@ const LoginContainer = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 2vw;
-`
+
+    @media (max-width: 768px) {
+        width: 80%;
+        gap: 4vw;
+    }
+
+    @media (max-width: 480px) {
+        width: 90%;
+        gap: 6vw;
+    }
+`;
 
 const LoginButton = styled.button`
     width: 100%;
@@ -35,7 +50,19 @@ const LoginButton = styled.button`
     font-size: 1.2vw;
     color: black;
     font-weight: bold;
-`
+
+    @media (max-width: 768px) {
+        height: 8vw;
+        font-size: 3vw;
+        border-radius: 5vw;
+    }
+
+    @media (max-width: 480px) {
+        height: 10vw;
+        font-size: 4vw;
+        border-radius: 6vw;
+    }
+`;
 
 const LoginPage = () => {
     const [id, setId] = useState('');
@@ -91,7 +118,7 @@ const LoginPage = () => {
                 <LoginButton onClick={handleLogin}>로그인</LoginButton>
             </LoginContainer>
         </PageContainer>
-    )
-}
+    );
+};
 
 export default LoginPage;

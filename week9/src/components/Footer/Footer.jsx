@@ -11,14 +11,30 @@ const FooterContainer = styled.div`
     bottom: 0; 
     left: 0; 
     right: 0; 
-    z-index: 999; 
-`
+    z-index: 999;
+
+    @media (max-width: 768px) {
+        height: 5vw;
+    }
+
+    @media (max-width: 480px) {
+        height: 8vw;
+    }
+`;
 
 const FooterP = styled.p`
     font-style: italic;
     font-weight: bold;
     font-size: 1vw;
-`
+
+    @media (max-width: 768px) {
+        font-size: 2.5vw;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 3.5vw;
+    }
+`;
 
 const Footer = () => {
     return (

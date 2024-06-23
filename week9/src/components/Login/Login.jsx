@@ -6,7 +6,7 @@ const InputContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-`
+`;
 
 const InputBox = styled.input`
     width: 100%;
@@ -17,9 +17,21 @@ const InputBox = styled.input`
     box-sizing: border-box;
     outline: none;
     font-size: 0.8vw;
-`
 
-const InputLogin = ({placeholder, type, value, onChange}) => {
+    @media (max-width: 768px) {
+        height: 8vw;
+        font-size: 2.5vw;
+        border-radius: 4vw;
+    }
+
+    @media (max-width: 480px) {
+        height: 10vw;
+        font-size: 3vw;
+        border-radius: 5vw;
+    }
+`;
+
+const InputLogin = ({ placeholder, type, value, onChange }) => {
     return (
         <InputContainer>
             <InputBox 
@@ -29,7 +41,7 @@ const InputLogin = ({placeholder, type, value, onChange}) => {
                 onChange={onChange}
             />
         </InputContainer>
-    )
-}
+    );
+};
 
 export default InputLogin;

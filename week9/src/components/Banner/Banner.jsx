@@ -8,12 +8,20 @@ const BannerContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 768px) {
+        height: 25vw;
+    }
 `;
 
 const BannerP = styled.p`
     color: white;
     font-weight: bold;
     font-size: 1.6vw;
+
+    @media (max-width: 768px) {
+        font-size: 4vw;
+    }
 `;
 
 const Banner = () => {

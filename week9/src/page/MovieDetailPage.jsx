@@ -11,12 +11,28 @@ const DetailBox = styled.div`
     min-height: calc(100vh - 5vw);
     display: flex;
     margin: 0 20vw;
+
+    @media (max-width: 1200px) {
+        width: 80%;
+        margin: 0 10vw;
+    }
+
+    @media (max-width: 768px) {
+        width: 90%;
+        flex-direction: column;
+        margin: 0 5vw;
+    }
 `;
 
 const Posterimg = styled.img`
     width: 30%;
     height: auto;
     margin: 5vw;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        margin: 2vw 0;
+    }
 `;
 
 const DetailTextdiv = styled.div`
@@ -24,12 +40,20 @@ const DetailTextdiv = styled.div`
     flex-direction: column;
     margin: 5vw 0;
     margin-right: 5vw;
+
+    @media (max-width: 768px) {
+        margin: 2vw 0;
+    }
 `;
 
 const TitleP = styled.p`
     color: white;
     font-weight: bold;
     font-size: 2vw;
+
+    @media (max-width: 768px) {
+        font-size: 4vw;
+    }
 `;
 
 const RateDiv = styled.div`
@@ -38,22 +62,38 @@ const RateDiv = styled.div`
     gap: 0.3rem;
     color: white;
     font-size: 1.2vw;
+
+    @media (max-width: 768px) {
+        font-size: 2.5vw;
+    }
 `;
 
 const ReleaseDateP = styled.p`
     color: white;
     font-size: 1.2vw;
+
+    @media (max-width: 768px) {
+        font-size: 2.5vw;
+    }
 `;
 
 const SummaryTitle = styled.p`
     color: white;
     font-weight: bold;
     font-size: 1.2vw;
+
+    @media (max-width: 768px) {
+        font-size: 2.5vw;
+    }
 `;
 
 const SummaryP = styled.p`
     color: white;
     font-size: 1vw;
+
+    @media (max-width: 768px) {
+        font-size: 2vw;
+    }
 `;
 
 const BackgroundDiv = styled.div`
@@ -66,6 +106,10 @@ const CreditsTitle = styled.h2`
     color: white;
     text-align: center;
     margin-bottom: 2vw;
+
+    @media (max-width: 768px) {
+        font-size: 3vw;
+    }
 `;
 
 const CreditsContainer = styled.div`
@@ -90,6 +134,11 @@ const CreditImage = styled.img`
     height: 50px;
     border-radius: 50%;
     margin-bottom: 0.5vw;
+
+    @media (max-width: 768px) {
+        width: 100px;
+        height: 100px;
+    }
 `;
 
 const ContentWrapper = styled.div`
