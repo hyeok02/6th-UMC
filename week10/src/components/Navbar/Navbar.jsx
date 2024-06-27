@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import ShareKakao from "../../../api/Sharekakao";
 
 const NavContainer = styled.div`
     width: 100%;
@@ -151,6 +152,7 @@ const Navbar = () => {
             <NavContainer>
                 <NavContainer2>
                     <NavP to="/">UMC Movie</NavP>
+                    <ShareKakao/>
                     <NavPContainer>
                         {isLoggedIn ? (
                             <NavP onClick={handleLogout}>로그아웃</NavP>
