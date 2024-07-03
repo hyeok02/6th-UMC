@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { NavLink, useLocation } from "react-router-dom";
 import ShareKakao from "../../../api/Sharekakao";
 import { getRedirectURI } from "../../../api/RedirectURI";
@@ -78,17 +78,36 @@ const HamburgerLines = styled.div`
     margin: 3px 0;
 `;
 
+const slideIn = keyframes`
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+`;
+
+const slideOut = keyframes`
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+`;
+
 const MobileMenu = styled.div`
     display: flex;
     flex-direction: column;
     background-color: #040E40;
-    position: absolute;
+    position: fixed;
     top: 50px;
     right: 0;
-    width: 100%;
+    width: 70%;
+    height: 100%;
     padding: 1em;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-
+    animation: ${props => (props.isOpen ? slideIn : slideOut)} 0.3s forwards;
     @media (min-width: 801px) {
         display: none;
     }
@@ -160,22 +179,20 @@ const Navbar = () => {
                     <HamburgerLines />
                 </HamburgerMenu>
             </NavbarContent>
-            {isMobileMenuOpen && (
-                <MobileMenu>
-                    {isAuthenticated ? (
-                        <StyledNavLink to="/" onClick={() => { setIsMobileMenuOpen(false); logoutHandler(); }}>로그아웃</StyledNavLink>
-                    ) : (
-                        <>
-                            <StyledNavLink to="/login" onClick={() => setIsMobileMenuOpen(false)}>로그인</StyledNavLink>
-                            <StyledNavLink to="/sign" onClick={() => setIsMobileMenuOpen(false)}>회원가입</StyledNavLink>
-                        </>
-                    )}
-                    <StyledNavLink to="/popular" onClick={() => setIsMobileMenuOpen(false)}>Popular</StyledNavLink>
-                    <StyledNavLink to="/now" onClick={() => setIsMobileMenuOpen(false)}>Now Playing</StyledNavLink>
-                    <StyledNavLink to="/top" onClick={() => setIsMobileMenuOpen(false)}>Top Rated</StyledNavLink>
-                    <StyledNavLink to="/up" onClick={() => setIsMobileMenuOpen(false)}>Upcoming</StyledNavLink>
-                </MobileMenu>
-            )}
+            <MobileMenu isOpen={isMobileMenuOpen}>
+                {isAuthenticated ? (
+                    <StyledNavLink to="/" onClick={() => { setIsMobileMenuOpen(false); logoutHandler(); }}>로그아웃</StyledNavLink>
+                ) : (
+                    <>
+                        <StyledNavLink to="/login" onClick={() => setIsMobileMenuOpen(false)}>로그인</StyledNavLink>
+                        <StyledNavLink to="/sign" onClick={() => setIsMobileMenuOpen(false)}>회원가입</StyledNavLink>
+                    </>
+                )}
+                <StyledNavLink to="/popular" onClick={() => setIsMobileMenuOpen(false)}>Popular</StyledNavLink>
+                <StyledNavLink to="/now" onClick={() => setIsMobileMenuOpen(false)}>Now Playing</StyledNavLink>
+                <StyledNavLink to="/top" onClick={() => setIsMobileMenuOpen(false)}>Top Rated</StyledNavLink>
+                <StyledNavLink to="/up" onClick={() => setIsMobileMenuOpen(false)}>Upcoming</StyledNavLink>
+            </MobileMenu>
         </NavbarWrapper>
     );
 }
