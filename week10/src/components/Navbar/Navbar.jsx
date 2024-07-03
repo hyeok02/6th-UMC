@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import ShareKakao from "../../../api/Sharekakao";
 import { getRedirectURI } from "../../../api/RedirectURI";
 
@@ -43,7 +43,7 @@ const StyledNavLink = styled(NavLink)`
 
     &:hover {
         color: #FFCC15;
-        font-size: 1.1vw;
+        /* font-size: 1.1vw; 해당 라인 제거 */
     }
 
     &.active {
@@ -108,14 +108,27 @@ const MobileMenu = styled.div`
     padding: 1em;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     animation: ${props => (props.isOpen ? slideIn : slideOut)} 0.3s forwards;
+    z-index: 1000; /* 추가된 부분 */
+    
     @media (min-width: 801px) {
         display: none;
     }
 `;
 
-const MobileNavLink = styled(StyledNavLink)`
+const MobileNavLink = styled(NavLink)`
     font-size: 5vw;
     margin: 1em 0;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+        color: #FFCC15;
+    }
+
+    &.active {
+        color: #FFCC15;
+    }
 
     @media (max-width: 800px) {
         font-size: 6vw;
@@ -124,6 +137,7 @@ const MobileNavLink = styled(StyledNavLink)`
 
 const Navbar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -145,6 +159,11 @@ const Navbar = () => {
         } catch (error) {
             console.error('Logout Error: ', error);
         }
+    };
+
+    const handleMobileNavLinkClick = (path) => {
+        setIsMobileMenuOpen(false);
+        navigate(path);
     };
 
     const displayNav = [
