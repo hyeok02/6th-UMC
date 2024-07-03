@@ -8,13 +8,29 @@ const BannerContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-`
+
+    @media (max-width: 800px) {
+        height: 25vw;
+    }
+
+    @media (max-width: 500px) {
+        height: 35vw;
+    }
+`;
 
 const BannerP = styled.p`
     color: white;
     font-weight: bold;
     font-size: 1.6vw;
-`
+
+    @media (max-width: 800px) {
+        font-size: 2.5vw;
+    }
+
+    @media (max-width: 500px) {
+        font-size: 3.5vw;
+    }
+`;
 
 const Banner = () => {
     const [username, setUsername] = useState('');
