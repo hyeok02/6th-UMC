@@ -11,6 +11,10 @@ const NavbarWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 800px) {
+        height: 50px;
+    }
 `;
 
 const NavbarContent = styled.div`
@@ -25,6 +29,10 @@ const LinkGroup = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 40%;
+
+    @media (max-width: 800px) {
+        display: none;
+    }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -41,6 +49,10 @@ const StyledNavLink = styled(NavLink)`
     &.active {
         color: #FFCC15;
     }
+
+    @media (max-width: 800px) {
+        font-size: 3vw;
+    }
 `;
 
 const LogoGroup = styled.div`
@@ -49,9 +61,43 @@ const LogoGroup = styled.div`
     gap: 0.5vw;
 `;
 
+const HamburgerMenu = styled.div`
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+
+    @media (max-width: 800px) {
+        display: flex;
+    }
+`;
+
+const HamburgerLines = styled.div`
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+`;
+
+const MobileMenu = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: #040E40;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 100%;
+    padding: 1em;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+
+    @media (min-width: 801px) {
+        display: none;
+    }
+`;
+
 const Navbar = () => {
     const location = useLocation();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -108,7 +154,28 @@ const Navbar = () => {
                     <StyledNavLink to="/top">Top Rated</StyledNavLink>
                     <StyledNavLink to="/up">Upcoming</StyledNavLink>
                 </LinkGroup>
+                <HamburgerMenu onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                    <HamburgerLines />
+                    <HamburgerLines />
+                    <HamburgerLines />
+                </HamburgerMenu>
             </NavbarContent>
+            {isMobileMenuOpen && (
+                <MobileMenu>
+                    {isAuthenticated ? (
+                        <StyledNavLink to="/" onClick={() => { setIsMobileMenuOpen(false); logoutHandler(); }}>로그아웃</StyledNavLink>
+                    ) : (
+                        <>
+                            <StyledNavLink to="/login" onClick={() => setIsMobileMenuOpen(false)}>로그인</StyledNavLink>
+                            <StyledNavLink to="/sign" onClick={() => setIsMobileMenuOpen(false)}>회원가입</StyledNavLink>
+                        </>
+                    )}
+                    <StyledNavLink to="/popular" onClick={() => setIsMobileMenuOpen(false)}>Popular</StyledNavLink>
+                    <StyledNavLink to="/now" onClick={() => setIsMobileMenuOpen(false)}>Now Playing</StyledNavLink>
+                    <StyledNavLink to="/top" onClick={() => setIsMobileMenuOpen(false)}>Top Rated</StyledNavLink>
+                    <StyledNavLink to="/up" onClick={() => setIsMobileMenuOpen(false)}>Upcoming</StyledNavLink>
+                </MobileMenu>
+            )}
         </NavbarWrapper>
     );
 }
