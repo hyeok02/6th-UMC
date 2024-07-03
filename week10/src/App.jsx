@@ -29,7 +29,7 @@ function App() {
           <Route path="/top" element={<TopRated/>} />
           <Route path="/up" element={<UpComing/>} />
           <Route path="*" element={<NotFoundPage/>} />
-          
+          <Route path="/login/auth" element={<LoginPage/>} />
         </Routes>
         <Footer/>
       </Router>

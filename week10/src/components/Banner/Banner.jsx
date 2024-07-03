@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
 const BannerContainer = styled.div`
@@ -8,43 +8,33 @@ const BannerContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
-    @media (max-width: 768px) {
-        height: 25vw;
-    }
-`;
+`
 
 const BannerP = styled.p`
     color: white;
     font-weight: bold;
     font-size: 1.6vw;
-
-    @media (max-width: 768px) {
-        font-size: 4vw;
-    }
-`;
+`
 
 const Banner = () => {
     const [username, setUsername] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const storedUsername = localStorage.getItem("userNickname");
-        setUsername(storedUsername);
-    }, []);
+        const fetchData = async () => {
+            const localUsername = localStorage.getItem('username');
+            setUsername(localUsername);
+            setLoading(false);
+        };
 
-    const handleLogout = () => {
-        // 사용자 정보 제거
-        localStorage.removeItem("userToken");
-        localStorage.removeItem("userNickname");
-        // 상태 업데이트
-        setUsername('');
-    };
+        fetchData();
+    }, []);
 
     return (
         <BannerContainer>
-            <BannerP>{username ? `${username}님 환영합니다` : "환영합니다"}</BannerP>
+            <BannerP>{loading ? '로딩 중...' : `${username ? `${username}님 환영합니다` : '환영합니다'}`}</BannerP>
         </BannerContainer>
-    );
-};
+    )
+}
 
 export default Banner;

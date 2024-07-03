@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PageContainer from "../components/Style/PageStyle";
 import InputLogin from "../components/Login/Login";
+import LoginKakao from "../../api/LoginKakao";
+
+const KakaoContainer = styled.div`
+    width: 100%;
+`;
 
 const LoginP = styled.p`
     font-size: 1vw;
@@ -69,6 +74,13 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const token = localStorage.getItem('userToken');
+        if (token) {
+            navigate('/');
+        }
+    }, [navigate]);
+
     const handleLogin = async (e) => {
         e.preventDefault();
         
@@ -116,6 +128,11 @@ const LoginPage = () => {
                 />
 
                 <LoginButton onClick={handleLogin}>로그인</LoginButton>
+
+                <KakaoContainer>
+                    <LoginP style={{marginTop: "0"}}>카카오톡 로그인</LoginP>
+                    <LoginKakao/>
+                </KakaoContainer>
             </LoginContainer>
         </PageContainer>
     );

@@ -206,27 +206,34 @@ const SignUpPage = () => {
     const handleSignUp = () => {
         const userData = {
             name: name,
-            age: age,
-            passwordCheck: passwordCheck,
             email: email,
+            age: age,
+            username: username,
             password: password,
-            username: username
+            passwordCheck: passwordCheck
         };
-
+    
         axios.post('http://localhost:8080/auth/signup', userData)
             .then(response => {
-                console.log(response.data);
-                localStorage.setItem('signupLogs', JSON.stringify(response.data));
-                alert("회원가입이 정상적으로 처리되었습니다.");
-                navigate('/login');
+                if (response.status === 201) {
+                    console.log(response.data);
+                    alert("회원가입이 완료되었습니다.");
+                    window.location.href = "http://localhost:5173/login";
+                }
             })
             .catch(error => {
-                console.error('Error:', error);
-                if (error.response.status === 409) {
-                    navigate('/login');
+                if (error.response) {
+                    console.log('Error: ', error);
+                    if (error.response.status === 409) {
+                        alert("이미 아이디가 존재합니다.");
+                        window.location.href="/login";
+                    } else if (error.response.status === 400) {
+                        alert("입력한 데이터를 확인해 주세요.");
+                    }
                 }
             });
     }
+    
 
     return (
         <PageContainer>
