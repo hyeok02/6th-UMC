@@ -113,6 +113,15 @@ const MobileMenu = styled.div`
     }
 `;
 
+const MobileNavLink = styled(StyledNavLink)`
+    font-size: 5vw;
+    margin: 1em 0;
+
+    @media (max-width: 800px) {
+        font-size: 6vw;
+    }
+`;
+
 const Navbar = () => {
     const location = useLocation();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -181,17 +190,17 @@ const Navbar = () => {
             </NavbarContent>
             <MobileMenu isOpen={isMobileMenuOpen}>
                 {isAuthenticated ? (
-                    <StyledNavLink to="/" onClick={() => { setIsMobileMenuOpen(false); logoutHandler(); }}>로그아웃</StyledNavLink>
+                    <MobileNavLink to="/" onClick={() => { setIsMobileMenuOpen(false); logoutHandler(); }}>로그아웃</MobileNavLink>
                 ) : (
                     <>
-                        <StyledNavLink to="/login" onClick={() => setIsMobileMenuOpen(false)}>로그인</StyledNavLink>
-                        <StyledNavLink to="/sign" onClick={() => setIsMobileMenuOpen(false)}>회원가입</StyledNavLink>
+                        <MobileNavLink to="/login" onClick={() => setIsMobileMenuOpen(false)}>로그인</MobileNavLink>
+                        <MobileNavLink to="/sign" onClick={() => setIsMobileMenuOpen(false)}>회원가입</MobileNavLink>
                     </>
                 )}
-                <StyledNavLink to="/popular" onClick={() => setIsMobileMenuOpen(false)}>Popular</StyledNavLink>
-                <StyledNavLink to="/now" onClick={() => setIsMobileMenuOpen(false)}>Now Playing</StyledNavLink>
-                <StyledNavLink to="/top" onClick={() => setIsMobileMenuOpen(false)}>Top Rated</StyledNavLink>
-                <StyledNavLink to="/up" onClick={() => setIsMobileMenuOpen(false)}>Upcoming</StyledNavLink>
+                <MobileNavLink to="/popular" onClick={() => setIsMobileMenuOpen(false)}>Popular</MobileNavLink>
+                <MobileNavLink to="/now" onClick={() => setIsMobileMenuOpen(false)}>Now Playing</MobileNavLink>
+                <MobileNavLink to="/top" onClick={() => setIsMobileMenuOpen(false)}>Top Rated</MobileNavLink>
+                <MobileNavLink to="/up" onClick={() => setIsMobileMenuOpen(false)}>Upcoming</MobileNavLink>
             </MobileMenu>
         </NavbarWrapper>
     );
